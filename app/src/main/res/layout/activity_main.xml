@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,10 +8,221 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ui.activities.MainActivity">
+    tools:context=".ui.activities.MainActivity"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+   //мобильный телефон
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
-</RelativeLayout>
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/size_small_8"
+        android:layout_marginBottom="@dimen/size_small_8">
+        <ImageView
+            style="@style/icon.left"
+            android:src="@drawable/ic_phone_black_24dp"></ImageView>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_large_72"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size_medium_32"
+            android:layout_marginRight="@dimen/size_small_16">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <EditText
+                android:id="@+id/phone_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Мобильный"
+                android:inputType="phone"
+                android:text="89149467518"
+                android:enabled="false"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey_light"
+                android:focusable="false"/>
+        </android.support.design.widget.TextInputLayout></LinearLayout>
+        <ImageView
+            style="@style/icon.right"
+            android:src="@drawable/ic_phone_in_talk_black_24dp"/>/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/grey_light"
+        android:layout_marginLeft="@dimen/size_large_72"/>
+
+
+    //email
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/size_small_8"
+        android:layout_marginBottom="@dimen/size_small_8">
+        <ImageView
+            style="@style/icon.left"
+            android:src="@drawable/ic_email_black_24dp"></ImageView>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_large_72"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size_medium_32"
+            android:layout_marginRight="@dimen/size_small_16">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <EditText
+                    android:id="@+id/email_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="E-mail"
+                    android:inputType="textEmailAddress"
+                    android:text="energizr@mail.ru"
+                    android:enabled="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_light"
+                    android:focusable="false"/>
+            </android.support.design.widget.TextInputLayout></LinearLayout>
+        <ImageView
+            style="@style/icon.right"
+            android:src="@drawable/ic_send_black_24dp"/>/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/grey_light"
+        android:layout_marginLeft="@dimen/size_large_72"/>
+    //vk
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/size_small_8"
+        android:layout_marginBottom="@dimen/size_small_8">
+        <ImageView
+            style="@style/icon.left"
+            android:src="@drawable/vk_circle"></ImageView>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_large_72"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size_medium_32"
+            android:layout_marginRight="@dimen/size_small_16">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <EditText
+                    android:id="@+id/email_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Профиль в vk"
+                    android:inputType="textEmailAddress"
+                    android:text="vk.com/hellmojo"
+                    android:enabled="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_light"
+                    android:focusable="false"/>
+            </android.support.design.widget.TextInputLayout></LinearLayout>
+        <ImageView
+            style="@style/icon.right"
+            android:src="@drawable/ic_visibility_black_24dp"/>/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/grey_light"
+        android:layout_marginLeft="@dimen/size_large_72"/>
+    //github
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/size_small_8"
+        android:layout_marginBottom="@dimen/size_small_8">
+        <ImageView
+            style="@style/icon.left"
+            android:src="@drawable/github_circle"></ImageView>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_large_72"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size_medium_32"
+            android:layout_marginRight="@dimen/size_small_16">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <EditText
+                    android:id="@+id/email_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Репозиторий"
+                    android:inputType="textEmailAddress"
+                    android:text="github.com/hellmojo/DevIntensive"
+                    android:enabled="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_light"
+                    android:focusable="false"/>
+            </android.support.design.widget.TextInputLayout></LinearLayout>
+        <ImageView
+            style="@style/icon.right"
+            android:src="@drawable/ic_visibility_black_24dp"/>/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/grey_light"
+        android:layout_marginLeft="@dimen/size_large_72"/>
+    //about
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/size_small_8"
+        android:layout_marginBottom="@dimen/size_small_8">
+        <ImageView
+            style="@style/icon.left"
+            android:src="@drawable/ic_account_circle_black"></ImageView>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_large_72"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size_medium_32"
+            android:layout_marginRight="@dimen/size_small_16">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <EditText
+                    android:id="@+id/email_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="О себе"
+                    android:inputType="textEmailAddress"
+                    android:text="Учитель информатики."
+                    android:singleLine="false"
+                    android:enabled="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_light"
+                    android:focusable="false"/>
+            </android.support.design.widget.TextInputLayout></LinearLayout>
+    </LinearLayout>
+</LinearLayout>
