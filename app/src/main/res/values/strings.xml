@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">DevIntensive</string>
+    <string name="app_name">Мишин Алексей</string>
+    <string name="score">0</string>
+    <string name="score_str">Рейтинг</string>
+    <string name="code_count">500</string>
+    <string name="code_str">Строк кода</string>
+    <string name="app_num">1</string>
+    <string name="app_str">Проектов</string>
+    <string name="phone">Сотовый</string>
+    <string name="phone_hint">89149467518</string>
+    <string name="email">E-mail</string>
+    <string name="email_hint">energizr@mail.ru</string>
+    <string name="vk">Профиль VK</string>
+    <string name="vk_hint">vk.com/hellmojo</string>
+    <string name="git">Репозиторий</string>
+    <string name="git_hint">github.com/hellmojo/DevIntensive</string>
+    <string name="about">О себе</string>
+
+
+
+
 </resources>
