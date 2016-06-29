@@ -15,6 +15,15 @@
     <string name="git">Репозиторий</string>
     <string name="git_hint">github.com/hellmojo/DevIntensive</string>
     <string name="about">О себе</string>
+    <string name="about_str">Культ этот никогда не прекратится, он сохранится до тех пор, пока звёзды вновь не займут удачное положение, и тайные жрецы поднимут великого Ктулху из его могилы, чтобы оживить Его подданных и восстановить Его власть на земле.</string>
+
+
+    <!--drawer-->
+    <string name="user_name">Мишин Алексей</string>
+    <string name="user_mail">energizr@mail.ru</string>
+    <!--menu-->
+    <string name="my_profile">Мой профиль</string>
+    <string name="team">Команда</string>
 
 
 
