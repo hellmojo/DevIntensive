@@ -26,10 +26,14 @@
     <dimen name="spacing_larger_64">64dp</dimen>
     <dimen name="spacing_larger_72">72dp</dimen>
     <dimen name="spacing_larger_80">80dp</dimen>
+    <dimen name="fab_right_space">8dp</dimen>
 
     <!--line-->
     <dimen name="line_size">1dp</dimen>
     <dimen name="height_line">72dp</dimen>
+
+    <!--images-->
+    <dimen name="profile_user_img_size">256dp</dimen>
 
 
 </resources>
