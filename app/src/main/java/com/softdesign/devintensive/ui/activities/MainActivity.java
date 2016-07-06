@@ -1,5 +1,6 @@
 package com.softdesign.devintensive.ui.activities;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,6 +29,9 @@ import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,8 +42,8 @@ import android.widget.RelativeLayout;
 import com.softdesign.devintensive.R;
 import com.softdesign.devintensive.data.managers.DataManager;
 import com.softdesign.devintensive.utils.ConstantManager;
-import com.softdesign.devintensive.utils.RoundedAvatarDrawable;
 import com.squareup.picasso.Picasso;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -47,7 +51,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.jar.Manifest;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = ConstantManager.TAG_PREFIX + "MainActivity";
@@ -55,19 +61,33 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private ImageView mAvatarView;
     private DataManager mDataManager;
     private int mCurretEditMode = 0;
-    private ImageView mCallImg;
     private CoordinatorLayout mCoordinatorLayout;
     private Toolbar mToolBar;
     private DrawerLayout mNavigationDrawer;
     private FloatingActionButton mFab;
+
     private RelativeLayout mProfilePlaceholder;
     private CollapsingToolbarLayout mCollapsingToolbar;
     private AppBarLayout mAppBarLayout;
     private ImageView mProfileImage;
+    private EditText mPhoneCall;
 
 
+    @BindView(R.id.phone_et)
+    EditText mUserPhone;
 
-    private EditText mUserPhone, mUserMail, mUserVk, mUserGit, mUserAbout;
+    @BindView(R.id.email_et)
+    EditText mUserMail;
+
+    @BindView(R.id.vk_et)
+    EditText mUserVk;
+
+    @BindView(R.id.phone_et)
+    EditText mUserGit;
+
+    @BindView(R.id.phone_et)
+    EditText mUserAbout;
+
     private List<EditText> mUserInfoViews;
 
     private AppBarLayout.LayoutParams mAppBarParams = null;
@@ -84,11 +104,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Log.d(TAG, "onCreate");
 
         mDataManager = DataManager.getInstanse();
-        mCallImg = (ImageView) findViewById(R.id.call_img);
-        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_coordinator_container);
-        mToolBar = (Toolbar) findViewById(R.id.toolbar);
+        mFab = (FloatingActionButton)findViewById(R.id.fab);
+        mCoordinatorLayout = (CoordinatorLayout)findViewById(R.id.main_coordinator_container);
+        mToolBar = (Toolbar)findViewById(R.id.toolbar);
         mNavigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
-        mFab = (FloatingActionButton) findViewById(R.id.fab);
         mUserPhone = (EditText) findViewById(R.id.phone_et);
         mUserMail = (EditText) findViewById(R.id.email_et);
         mUserVk = (EditText) findViewById(R.id.vk_et);
@@ -98,6 +117,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         mAppBarLayout = (AppBarLayout)findViewById(R.id.appbar_layout);
         mProfileImage = (ImageView)findViewById(R.id.user_photo_img);
+
+
+        ButterKnife.bind(this);
         mUserInfoViews = new ArrayList<>();
         mUserInfoViews.add(mUserPhone);
         mUserInfoViews.add(mUserMail);
@@ -108,6 +130,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         mFab.setOnClickListener(this);
         mProfilePlaceholder.setOnClickListener(this);
+
+
+
 
         setupToolBar();
         setupDrawer();
@@ -187,7 +212,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fab:
-                if (mCurretEditMode == 0) {
+                if (mCurretEditMode == 0 ) {
                     changeEditMode(1);
                     mCurretEditMode = 1;
                 } else {
@@ -292,7 +317,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 showProfilePlaceholder();
                 lockToolbar();
                 mCollapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
-                mUserPhone.requestFocus();
+                mUserPhone.requestFocus();//Ставит фокус на строку сотовый
+                mUserPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+
             }
         } else {
             mFab.setImageResource(R.drawable.ic_create_black_24dp);
@@ -333,8 +360,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void loadPhotoFromCamera() {
-        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)== PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)== PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
 
 
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -351,8 +378,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }else
             {
                 ActivityCompat.requestPermissions(this, new String[]{
-                        android.Manifest.permission.CAMERA,
-                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
                 }, ConstantManager.CAMERA_REQUEST_PERMISSION_CODE);
 
                 Snackbar.make(mCoordinatorLayout, "Необходимо дать разрешение", Snackbar.LENGTH_LONG)
@@ -365,6 +392,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         }
     }
+
+    /*
+    private void callDial(){
+
+    }
+
+    private boolean editTextValidate(EditText editText){
+        switch (editText.getId()){
+            case R.id.phone_et:
+                String num = editText.getText().toString();
+                if(num.length() >= 11 && num.length() <= 20)
+        }
+
+    }*/
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -447,4 +488,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         startActivityForResult(appSettingsIntent, ConstantManager.PERMITION_REQUEST_SETTINGS_CODE);
     }
+
+    /*
+    private boolean editValidation(){
+
+        switch ()
+        mUserPhone.length()>=11 && mUserPhone.length() <= 20){
+            return true;
+        }else{
+            mUserPhone.setError("Неверно введен номер");
+        }
+    }*/
+
 }
