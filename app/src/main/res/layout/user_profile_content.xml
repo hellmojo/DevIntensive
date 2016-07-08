@@ -156,6 +156,7 @@
                             android:focusable="false"/>
                     </android.support.design.widget.TextInputLayout></LinearLayout>
                 <ImageView
+                    android:id="@+id/email_img"
                     style="@style/icon.right"
                     android:src="@drawable/ic_send_black_24dp"/>/>
 
@@ -199,6 +200,7 @@
                             android:focusable="false"/>
                     </android.support.design.widget.TextInputLayout></LinearLayout>
                 <ImageView
+                    android:id="@+id/vk_img"
                     style="@style/icon.right"
                     android:src="@drawable/ic_visibility_black_24dp"/>/>
 
@@ -241,6 +243,7 @@
                             android:focusable="false"/>
                     </android.support.design.widget.TextInputLayout></LinearLayout>
                 <ImageView
+                    android:id="@+id/git_img"
                     style="@style/icon.right"
                     android:src="@drawable/ic_visibility_black_24dp"/>/>
 

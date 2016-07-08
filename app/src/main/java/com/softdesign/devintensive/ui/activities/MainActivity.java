@@ -2,6 +2,7 @@ package com.softdesign.devintensive.ui.activities;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -70,7 +71,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private CollapsingToolbarLayout mCollapsingToolbar;
     private AppBarLayout mAppBarLayout;
     private ImageView mProfileImage;
-    private EditText mPhoneCall;
+    private ImageView mCallImg;
+    private ImageView mEmailImg;
+    private ImageView mVkImg;
+    private ImageView mGitImg;
+
+
 
 
     @BindView(R.id.phone_et)
@@ -117,6 +123,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         mAppBarLayout = (AppBarLayout)findViewById(R.id.appbar_layout);
         mProfileImage = (ImageView)findViewById(R.id.user_photo_img);
+        mCallImg = (ImageView) findViewById(R.id.call_img);
+        mEmailImg = (ImageView) findViewById(R.id.email_img);
+        mVkImg = (ImageView) findViewById(R.id.vk_img);
+        mGitImg = (ImageView) findViewById(R.id.git_img);
 
 
         ButterKnife.bind(this);
@@ -130,6 +140,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         mFab.setOnClickListener(this);
         mProfilePlaceholder.setOnClickListener(this);
+        mCallImg.setOnClickListener(this);
+        mEmailImg.setOnClickListener(this);
+        mVkImg.setOnClickListener(this);
+        mGitImg.setOnClickListener(this);
+
 
 
 
@@ -139,8 +154,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         loadUserInfoValue();
         Picasso.with(this)
                 .load(mDataManager.getmPreferensesManager().loadUserPhoto())
-                    .placeholder(R.drawable.user_photo)
-                    .into(mProfileImage);
+                .placeholder(R.drawable.user_photo)
+                .into(mProfileImage);
 
 
         if (savedInstanceState == null) {
@@ -224,6 +239,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.profile_placeholder:
                 /// Сделать выбор фотос камеры из загрузка с галлереи
                 showDialog(ConstantManager.LOAD_PROFILE_PHOTO);
+                break;
+            case R.id.call_img:
+                /// Позвонить по указанному в ET номеру
+                profileCall(mUserInfoViews.get(0).getText().toString());
+                break;
+            case R.id.email_img:
+                ///Отправить email по указанному адресу
+                sendEmail(mUserInfoViews.get(1).getText().toString());
+                break;
+            case R.id.vk_img:
+                ///Открыть указанный профиль
+                openVkProfile(mUserInfoViews.get(2).getText().toString());
+                break;
+            case R.id.git_img:
+                ///Открыть указанный профиль
+                openGitProfile(mUserInfoViews.get(3).getText().toString());
                 break;
 
         }
@@ -395,16 +426,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     /*
     private void callDial(){
-
     }
-
     private boolean editTextValidate(EditText editText){
         switch (editText.getId()){
             case R.id.phone_et:
                 String num = editText.getText().toString();
                 if(num.length() >= 11 && num.length() <= 20)
         }
-
     }*/
 
     @Override
@@ -447,7 +475,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     public void onClick(DialogInterface dialogInterface, int choiceItem) {
                         switch (choiceItem){
                             case 0:
-                               // showSnackbar("gallery");
+                                // showSnackbar("gallery");
                                 loadPhotoFromGallery();
                                 break;
                             case 1:
@@ -489,15 +517,83 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         startActivityForResult(appSettingsIntent, ConstantManager.PERMITION_REQUEST_SETTINGS_CODE);
     }
 
-    /*
-    private boolean editValidation(){
-
-        switch ()
-        mUserPhone.length()>=11 && mUserPhone.length() <= 20){
-            return true;
-        }else{
-            mUserPhone.setError("Неверно введен номер");
+    /**
+     * Интент для совершения звонка по номеру телефона указанному в профиле
+     * @param phoneNumber
+     */
+    private void profileCall(String phoneNumber) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+            if (!phoneNumber.isEmpty()) {
+                Uri uri = Uri.parse("tel:" + phoneNumber);
+                Intent callProfileIntent = new Intent(Intent.ACTION_DIAL, uri);
+                startActivity(callProfileIntent);
+            } else {
+                showSnackbar(getString(R.string.intent_call_err));
+            }
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.CALL_PHONE,
+            }, ConstantManager.CALL_REQUEST_PERMISSION_CODE);
+            //вызов настройки для выдачи разрешения-->
+            Snackbar.make(mCoordinatorLayout, R.string.intent_request_permission, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.intent_ally, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            openApplicationSettings();
+                        }
+                    }).show();
         }
-    }*/
+    }
+
+    /**
+     * Интент для отправки письма по указанному email
+     * @param email
+     */
+    private void sendEmail(String email) {
+
+        if (!email.isEmpty()) {
+            Intent sendEmailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", email, null));
+            try {
+                startActivity(Intent.createChooser(sendEmailIntent, getString(R.string.intent_chooser_email)));
+            } catch (ActivityNotFoundException ex) {
+                showSnackbar(getString(R.string.intent_email_client_err));
+
+            }
+        } else {
+            showSnackbar(getString(R.string.intent_email_err));
+        }
+    }
+
+    /**
+     *Интент на открытие профиля VK
+     * @param vkProfileUrl
+     */
+    private void openVkProfile(String vkProfileUrl){
+        if (!vkProfileUrl.equals("") || !vkProfileUrl.equals("null")) {
+            Intent vkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://" + vkProfileUrl));
+
+            try {
+                startActivity(Intent.createChooser(vkIntent,getString(R.string.intent_vk_open)));
+            } catch (ActivityNotFoundException e) {
+                showSnackbar(getString(R.string.intent_vk_app_err));
+            }
+        }
+    }
+
+    /**
+     * Интент на открытие профиля git
+     * @param gitProfileUrl
+     */
+    private void openGitProfile(String gitProfileUrl){
+        if (!gitProfileUrl.equals("") || !gitProfileUrl.equals("null")) {
+            Intent gitIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://" + gitProfileUrl));
+
+            try {
+                startActivity(gitIntent);
+            } catch (ActivityNotFoundException e) {
+                showSnackbar(getString(R.string.intent_git_app_err));
+            }
+        }
+    }
 
 }

@@ -36,5 +36,8 @@
     <dimen name="profile_user_img_size">256dp</dimen>
     <dimen name="placeholder_photo_size">90dp</dimen>
 
+    <!--radius-->
+    <dimen name="radius_normal">9dp</dimen>
+
 
 </resources>
