@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Мишин Алексей</string>
+   <!--profile-->
+    <string name="edit_photo">Изменить фотографию профиля</string>
+
+
     <string name="score">0</string>
     <string name="score_str">Рейтинг</string>
     <string name="code_count">500</string>
@@ -7,25 +11,56 @@
     <string name="app_num">1</string>
     <string name="app_str">Проектов</string>
     <string name="phone">Сотовый</string>
-    <string name="phone_hint">89149467518</string>
     <string name="email">E-mail</string>
-    <string name="email_hint">energizr@mail.ru</string>
     <string name="vk">Профиль VK</string>
-    <string name="vk_hint">vk.com/hellmojo</string>
     <string name="git">Репозиторий</string>
-    <string name="git_hint">github.com/hellmojo/DevIntensive</string>
     <string name="about">О себе</string>
-    <string name="about_str">Культ этот никогда не прекратится, он сохранится до тех пор, пока звёзды вновь не займут удачное положение, и тайные жрецы поднимут великого Ктулху из его могилы, чтобы оживить Его подданных и восстановить Его власть на земле.</string>
 
 
     <!--drawer-->
     <string name="user_name">Мишин Алексей</string>
     <string name="user_mail">energizr@mail.ru</string>
+
     <!--menu-->
     <string name="my_profile">Мой профиль</string>
     <string name="team">Команда</string>
 
+    <!--user photo dialog-->
+    <string name="photo_dialog_gallery">Загрузить из галлереи</string>
+    <string name="photo_dialog_camera">Сделать снимок</string>
+    <string name="photo_dialog_cancel">Отмена</string>
+    <string name="change_profile_photo">Изменить фотографию профиля</string>
 
+    <!--Login screen-->
+    <string name="login.title">ВОЙТИ</string>
+    <string name="login.email_hint">Email</string>
+    <string name="login.password">Пароль</string>
+    <string name="login.forgot">Забыли пароль?</string>
+
+
+
+
+    <!--validation-->
+    <string name="error_phone_input">Не правильно введен номер</string>
+    <string name="error_email_input">Не правильно введен email</string>
+    <string name="error_vk_input">Не правильный адрес vk</string>
+    <string name="error_git_input">Не правильный адрес git</string>
+
+
+    <!--intent action-->
+    <string name="intent.request_permission">Необходимо дать разрешение</string>
+    <string name="intent.ally">Разрешить</string>
+
+    <string name="intent.call_err">Номер телефона не указан</string>
+
+    <string name="intent_email_subject">Hello there</string>
+    <string name="intent_email_client_err">Почтовые клиенты не найдены</string>
+    <string name="intent_email_err">email адрес введен неверно</string>
+    <string name="intent_chooser_email">Отправить письмо</string>
+    <string name="intent_vk_app_err">Сопутствующих приложений не найдено</string>
+    <string name="intent_vk_open">Открыть профиль Вконтакте</string>
+    <string name="intent_git_app_err">Сопутствующих приложений не найдено</string>
+    <string name="intent_gallery">Выберите фото</string>
 
 
 </resources>
