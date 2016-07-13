@@ -33,6 +33,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/user_rating"
                         style="@style/text.title"
                         android:text="@string/score"/>
                     <TextView
@@ -51,6 +52,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/user_code_lines"
                         style="@style/text.title"
                         android:text="@string/code_count"/>
                     <TextView
@@ -69,6 +71,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/user_projects"
                         style="@style/text.title"
                         android:text="@string/app_num"/>
                     <TextView
