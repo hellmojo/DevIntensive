@@ -39,9 +39,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.softdesign.devintensive.R;
-import com.softdesign.devintensive.data.managers.DataManager;
+//import com.softdesign.devintensive.data.managers.DataManager;
+import com.softdesign.devintensive.data.messages.DataManager;
 import com.softdesign.devintensive.utils.ConstantManager;
 import com.squareup.picasso.Picasso;
 
@@ -54,7 +56,18 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import com.softdesign.devintensive.utils.NetworkStatusChecker;
+
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = ConstantManager.TAG_PREFIX + "MainActivity";
@@ -75,6 +88,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private ImageView mEmailImg;
     private ImageView mVkImg;
     private ImageView mGitImg;
+    TextView mUserProfileText;
+    TextView mUserEmailText;
 
 
 
@@ -99,7 +114,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private AppBarLayout.LayoutParams mAppBarParams = null;
     File mPhotoFile = null;
     private Uri mSelectedImage = null;
+    @BindViews({R.id.user_rating, R.id.user_code_lines, R.id.user_projects})
+    List<TextView> mUserValueViews;
 
+    @BindViews({R.id.phone_et, R.id.email_et, R.id.vk_et, R.id.git_et, R.id.about_et})
+    List<EditText> userFieldViews;
 
     /*Придумать и записать сюда javadoc
 */
@@ -137,7 +156,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mUserInfoViews.add(mUserGit);
         mUserInfoViews.add(mUserAbout);
 
-
+        mUserProfileText = (TextView)findViewById(R.id.user_name_txt);
+        mUserEmailText = (TextView)findViewById(R.id.user_email_txt);
         mFab.setOnClickListener(this);
         mProfilePlaceholder.setOnClickListener(this);
         mCallImg.setOnClickListener(this);
@@ -151,9 +171,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         setupToolBar();
         setupDrawer();
-        loadUserInfoValue();
+        initData();
         Picasso.with(this)
-                .load(mDataManager.getmPreferensesManager().loadUserPhoto())
+                .load(mDataManager.getPreferencesManager().loadUserPhoto())
                 .placeholder(R.drawable.user_photo)
                 .into(mProfileImage);
 
@@ -202,7 +222,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onPause() {
         super.onPause();
         Log.d(TAG, "onPause");
-        saveUserInfoValue();
+        saveUserField();
     }
 
     @Override
@@ -362,25 +382,65 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 unlockToolbar();
                 mCollapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.white));
 
-                saveUserInfoValue();
+                saveUserField();
             }
         }
     }
 
-    private void loadUserInfoValue() {
-        List<String> userData = mDataManager.getmPreferensesManager().loadUserProfileData();
-        for (int i = 0; i < userData.size(); i++) {
-            mUserInfoViews.get(i).setText(userData.get(i));
-        }
 
+    private void initData() {
+                initUserField();
+                initUserInfoValue();
+                //initContentValue();
+               // initNavValue();
+                initPhoto();
+            }
+
+    private void initUserField() {
+        List<String> userFields = mDataManager.getPreferencesManager().loadUserProfileData();
+        for (int i = 0; i < userFields.size(); i++) {
+            if (!userFields.get(i).equals("null")) userFieldViews.get(i).setText(userFields.get(i));
+        }
     }
 
-    private void saveUserInfoValue() {
+    private void initUserInfoValue() {
+        List<String> userData = mDataManager.getPreferencesManager().loadUserProfileValue();
+                for (int i = 0; i < userData.size(); i++) {
+                    if (!userData.get(i).equals("null"))
+                        mUserValueViews.get(i).setText(userData.get(i));
+                    }
+            }
+    /*
+        private void initContentValue() {
+            List<String> contentData = mDataManager.getPreferencesManager().loadContentValue();
+            for (int i = 0; i < contentData.size(); i++) {
+                userFieldViews.get(i).setText(contentData.get(i));
+            }
+        }
+
+        private void initNavValue() {
+            List<String> navData = mDataManager.getPreferencesManager().loadNavValue();
+            try {
+                mUserProfileText.setText(navData.get(0) + " " + navData.get(1));
+            } catch (Exception e) {
+                Log.d("M", e.getMessage());
+            }
+            mUserEmailText.setText(mDataManager.getPreferencesManager().getEmail());
+            Uri uri = Uri.parse(navData.get(2));
+            Picasso.with(this).load(uri).into(mAvatarView);
+
+        }
+    */
+    private void initPhoto() {
+        insertProfileImage(mDataManager.getPreferencesManager().loadUserPhoto());
+    }
+
+    private void saveUserField() {
         List<String> userData = new ArrayList<>();
         for (EditText userFieldView : mUserInfoViews) {
             userData.add(userFieldView.getText().toString());
         }
-        mDataManager.getmPreferensesManager().saveUserProfileData(userData);
+        mDataManager.getPreferencesManager().saveUserProfileData(userData);
     }
 
     private void loadPhotoFromGallery() {
@@ -508,7 +568,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .load(selectedImage)
                 .into(mProfileImage);
 
-        mDataManager.getmPreferensesManager().SaveUserPhoto(selectedImage);
+        mDataManager.getPreferencesManager().saveUserPhoto(selectedImage);
     }
 
     public void openApplicationSettings(){
@@ -596,4 +656,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+    private void uploadPhoto(Uri uri) {
+        if (NetworkStatusChecker.isNetworkAvailable(this)) {
+            File file = new File(uri.getPath());
+
+            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+            MultipartBody.Part body = MultipartBody.Part.createFormData("picture", file.getName(), requestFile);
+
+            String descriptionString = "load photo";
+            RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"), descriptionString);
+
+            Call<ResponseBody> call = mDataManager.savePhoto(description, body);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call,
+                                       Response<ResponseBody> response) {
+                    Log.v("Upload", "success");
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.e("Upload error:", t.getMessage());
+                }
+            });
+        } else {
+            showSnackbar("Сеть на данный момент не доступна");
+        }
+    }
 }

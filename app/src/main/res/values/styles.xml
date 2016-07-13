@@ -87,7 +87,7 @@
         +        <item name="android:layout_marginTop">@dimen/size_small_16</item>
         +        <item name="android:gravity">center</item>
         +        <item name="android:fontFamily">sans-serif-condensed</item>
-        +        <item name="android:text">@string/login.forgot_password</item>
+        +        <item name="android:text">@string/login.forgot</item>
         +        <item name="android:textColor">@color/gray_light</item>
         +    </style>
 
