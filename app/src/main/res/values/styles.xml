@@ -1,11 +1,103 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="color_primary">@color/colorPrimary</item>
-        <item name="color_primary_dark">@color/colorPrimaryDark</item>
-        <item name="color_accent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+    </style>
+    <style name="icon">
+        <item name="android:layout_width">@dimen/size_small_24</item>
+        <item name="android:layout_height">@dimen/size_small_24</item>
+    </style>
+    <style name="icon.left" parent="icon">
+        <item name="android:layout_gravity">top|left</item>
+        <item name="android:layout_marginTop">@dimen/size_small_24</item>
+        <item name="android:layout_marginLeft">@dimen/size_small_16</item>
+    </style>
+    <style name="icon.right" parent="icon">
+        <item name="android:layout_gravity">top|right</item>
+        <item name="android:layout_marginTop">@dimen/size_small_24</item>
+        <item name="android:layout_marginRight">@dimen/size_medium_32</item>
+    </style>
+    <style name="block">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">72dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+<!--content text -->
+    <style name="text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
+    <style name="text.title" parent="text">
+        <item name="android:textSize">@dimen/size_small_24</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+<!--dialog-->
+    <style name="custom_dialog">
+        <item name="android:fullDark">@android:color/transparent</item>
+    </style>
+<!--toolbar -->
+    <style name="AppTheme.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="auth_layout_style">
+                <item name="android:layout_gravity">center</item>
+                <item name="android:background">@color/white</item>
+                <item name="android:elevation">12dp</item>
+                <item name="android:padding">@dimen/size_medium_32</item>
+                <item name="android:orientation">vertical</item>
+            </style>
+
+        <style name="auth_textinput_style">
+            <item name="android:layout_marginTop">@dimen/size_small_16</item>
+            <item name="android:textColorHint">@color/gray_light</item>
+        </style>
+
+        <style name="auth_textfield_style">
+            <item name="android:textColor">@color/black</item>
+            <item name="android:maxLength">30</item>
+            <item name="android:fontFamily">sans-serif-condensed</item>
+        </style>
+
+        <style name="auth_button">
+            <item name="android:layout_marginTop">@dimen/size_small_16</item>
+            <item name="android:layout_marginLeft">@dimen/size_medium_32</item>
+            <item name="android:layout_marginRight">@dimen/size_medium_32</item>
+            <item name="android:fontFamily">sans-serif-medium</item>
+            <item name="android:backgroundTint">@color/red_dark</item>
+            <item name="android:textColor">@color/white</item>
+        </style>
+
+    <style name="auth_clicktable_textview_style">
+                <item name="android:clickable">true</item>
+                <item name="android:layout_width">match_parent</item>
+                <item name="android:layout_height">wrap_content</item>+
+                <item name="android:layout_marginTop">@dimen/size_small_16</item>
+                <item name="android:gravity">center</item>
+                <item name="android:fontFamily">sans-serif-condensed</item>
+                <item name="android:text">@string/login.forgot</item>
+                <item name="android:textColor">@color/gray_light</item>
+            </style>
+
+
+    <!--toolbar-->
+    <style name="ToolBarStyle" parent="Theme.AppCompat">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+
     </style>
 
 </resources>
