@@ -239,6 +239,7 @@
                             android:id="@+id/git_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:inputType="textMultiLine"
                             android:hint="@string/git"
                             android:enabled="false"
                             android:textColor="@color/black"
