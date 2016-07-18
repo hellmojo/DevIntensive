@@ -15,6 +15,7 @@ public class UserModelRes {
     private Data data;
 
     public Data getData() {
+
         return data;
     }
 
@@ -55,30 +56,37 @@ public class UserModelRes {
         private String updated;
 
         public String getId() {
+
             return id;
         }
 
         public ProfileValues getProfileValues() {
+
             return profileValues;
         }
 
         public Contacts getContacts() {
+
             return contacts;
         }
 
         public String getFirstName() {
+
             return firstName;
         }
 
         public String getSecondName() {
+
             return secondName;
         }
 
         public Repositories getRepositories() {
+
             return repositories;
         }
 
         public PublicInfo getPublicInfo() {
+
             return publicInfo;
         }
     }
@@ -161,14 +169,17 @@ public class UserModelRes {
         private String updated;
 
         public int getProjects() {
+
             return projects;
         }
 
         public int getLinesCode() {
+
             return linesCode;
         }
 
         public int getRating() {
+
             return rait;
         }
     }
@@ -207,14 +218,17 @@ public class UserModelRes {
         private String updated;
 
         public String getVk() {
+
             return vk;
         }
 
         public String getPhone() {
+
             return phone;
         }
 
         public String getEmail() {
+
             return email;
         }
     }

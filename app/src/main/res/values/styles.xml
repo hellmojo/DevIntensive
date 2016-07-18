@@ -53,42 +53,115 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
     <style name="auth_layout_style">
-        +        <item name="android:layout_gravity">center</item>
-        +        <item name="android:background">@color/white</item>
-        +        <item name="android:elevation">12dp</item>
-        +        <item name="android:padding">@dimen/size_medium_32</item>
-        +        <item name="android:orientation">vertical</item>
-        +    </style>
-    +
-    +    <style name="auth_textinput_style">
-    +        <item name="android:layout_marginTop">@dimen/size_small_16</item>
-    +        <item name="android:textColorHint">@color/gray_light</item>
-    +    </style>
-    +
-    +    <style name="auth_textfield_style">
-    +        <item name="android:textColor">@color/black</item>
-    +        <item name="android:maxLength">30</item>
-    +        <item name="android:fontFamily">sans-serif-condensed</item>
-    +    </style>
-    +
-    +    <style name="auth_button">
-    +        <item name="android:layout_marginTop">@dimen/size_small_16</item>
-    +        <item name="android:layout_marginLeft">@dimen/size_medium_32</item>
-    +        <item name="android:layout_marginRight">@dimen/size_medium_32</item>
-    +        <item name="android:fontFamily">sans-serif-medium</item>
-    +        <item name="android:backgroundTint">@color/red_dark</item>
-    +        <item name="android:textColor">@color/white</item>
-    +    </style>
+                <item name="android:layout_gravity">center</item>
+                <item name="android:background">@color/white</item>
+                <item name="android:elevation">12dp</item>
+                <item name="android:padding">@dimen/size_medium_32</item>
+                <item name="android:orientation">vertical</item>
+            </style>
+
+        <style name="auth_textinput_style">
+            <item name="android:layout_marginTop">@dimen/size_small_16</item>
+            <item name="android:textColorHint">@color/gray_light</item>
+        </style>
+
+        <style name="auth_textfield_style">
+            <item name="android:textColor">@color/black</item>
+            <item name="android:maxLength">30</item>
+            <item name="android:fontFamily">sans-serif-condensed</item>
+        </style>
+
+        <style name="auth_button">
+            <item name="android:layout_marginTop">@dimen/size_small_16</item>
+            <item name="android:layout_marginLeft">@dimen/size_medium_32</item>
+            <item name="android:layout_marginRight">@dimen/size_medium_32</item>
+            <item name="android:fontFamily">sans-serif-medium</item>
+            <item name="android:backgroundTint">@color/red_dark</item>
+            <item name="android:textColor">@color/white</item>
+        </style>
 
     <style name="auth_clicktable_textview_style">
-        +        <item name="android:clickable">true</item>
-        +        <item name="android:layout_width">match_parent</item>
-        +        <item name="android:layout_height">wrap_content</item>
-        +        <item name="android:layout_marginTop">@dimen/size_small_16</item>
-        +        <item name="android:gravity">center</item>
-        +        <item name="android:fontFamily">sans-serif-condensed</item>
-        +        <item name="android:text">@string/login.forgot</item>
-        +        <item name="android:textColor">@color/gray_light</item>
-        +    </style>
+                <item name="android:clickable">true</item>
+                <item name="android:layout_width">match_parent</item>
+                <item name="android:layout_height">wrap_content</item>+
+                <item name="android:layout_marginTop">@dimen/size_small_16</item>
+                <item name="android:gravity">center</item>
+                <item name="android:fontFamily">sans-serif-condensed</item>
+                <item name="android:text">@string/login.forgot</item>
+                <item name="android:textColor">@color/gray_light</item>
+            </style>
+
+
+    <!--toolbar-->
+    <style name="ToolBarStyle" parent="Theme.AppCompat">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+
+    </style>
+
+    <style name="profile_subheader">
+        <item name="android:background">@color/gray</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingBottom">@dimen/profile_subheader_vertical_padding</item>
+        <item name="android:paddingTop">@dimen/profile_subheader_vertical_padding</item>
+    </style>
+
+    <style name="profile_subheader_item">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="profile_subheader_divider">
+        <item name="android:background">#7C7C7C</item>
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="profile_subheader_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">22dp</item>
+        <item name="android:textColor">@android:color/primary_text_dark</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
+    <style name="profile_subheader_text.subtext">
+        <item name="android:textSize">15dp</item>
+
+    </style>
+
+    <style name="main_activity_edit_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:enabled">false</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/gray</item>
+        <item name="android:focusable">false</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+    <style name="info_line_wrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_marginTop">@dimen/spacing_small_8</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_small_8</item>
+    </style>
+    <style name="main_activity_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/line_size</item>
+        <item name="android:background">@color/gray_light</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_larger_72</item>
+    </style>
+    <style name="info_line_center_block">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/size_large_72</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">bottom</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_medium_32</item>
+    </style>
 
 </resources>

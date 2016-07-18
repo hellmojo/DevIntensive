@@ -38,6 +38,8 @@
 
     <!--radius-->
     <dimen name="radius_normal">9dp</dimen>
+    <dimen name="profile_subheader_height">112dp</dimen>
+    <dimen name="profile_subheader_vertical_padding">28dp</dimen>
 
 
 </resources>

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Мишин Алексей</string>
-   <!--profile-->
+    <!--profile-->
     <string name="edit_photo">Изменить фотографию профиля</string>
 
 
@@ -38,8 +38,6 @@
     <string name="login.forgot">Забыли пароль?</string>
 
 
-
-
     <!--validation-->
     <string name="error_phone_input">Не правильно введен номер</string>
     <string name="error_email_input">Не правильно введен email</string>
@@ -61,6 +59,10 @@
     <string name="intent_vk_open">Открыть профиль Вконтакте</string>
     <string name="intent_git_app_err">Сопутствующих приложений не найдено</string>
     <string name="intent_gallery">Выберите фото</string>
+
+    <!---fonts-->
+    <string name="ff_medium">sans-serif-medium</string>
+    <string name="ff_regular">sans-serif-regular</string>
 
 
 </resources>

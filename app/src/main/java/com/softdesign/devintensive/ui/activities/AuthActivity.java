@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.softdesign.devintensive.R;
-import com.softdesign.devintensive.data.messages.DataManager;
+import com.softdesign.devintensive.data.managers.DataManager;
 import com.softdesign.devintensive.data.network.req.UserLoginReq;
 import com.softdesign.devintensive.data.network.res.UserModelRes;
 import com.softdesign.devintensive.utils.NetworkStatusChecker;
@@ -71,10 +72,11 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void loginSucces(UserModelRes userModel){
-        mDataManager.getPreferencesManager().saveAuthToken(userModel.getData().getToken());
-        mDataManager.getPreferencesManager().saveUserId(userModel.getData().getUser().getId());
-        saveUserValues(userModel);
-        saveContentValues(userModel);
+        mDataManager.getmPreferensesManager().saveAuthToken(userModel.getData().getToken());
+        Log.d("TOKEN", userModel.getData().getToken());
+        mDataManager.getmPreferensesManager().saveUserId(userModel.getData().getUser().getId());
+             saveUserValues(userModel);
+       saveContentValues(userModel);
         saveNavValues(userModel);
         savePhoto(userModel);
         Intent loginIntent = new Intent(this, MainActivity.class);
@@ -112,7 +114,7 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
                 userModel.getData().getUser().getProfileValues().getLinesCode(),
                 userModel.getData().getUser().getProfileValues().getProjects()
         };
-        mDataManager.getPreferencesManager().saveUserProfileValue(userValues);
+        mDataManager.getmPreferensesManager().saveUserProfileValue(userValues);
     }
 
     private void saveContentValues(UserModelRes userModel){
@@ -124,18 +126,19 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
                 userModel.getData().getUser().getPublicInfo().getBio()
 
         };
-        mDataManager.getPreferencesManager().saveContentValue(contentValues);
+        mDataManager.getmPreferensesManager().saveContentValue(contentValues);
     }
-
     private void saveNavValues(UserModelRes userModel){
         String[] navValues = {
                 userModel.getData().getUser().getFirstName(),
                 userModel.getData().getUser().getSecondName(),
                 userModel.getData().getUser().getPublicInfo().getAvatar()
         };
-        mDataManager.getPreferencesManager().saveNavValue(navValues);
+        mDataManager.getmPreferensesManager().saveNavValue(navValues);
     }
+
     private void savePhoto(UserModelRes userModel){
-        mDataManager.getPreferencesManager().saveUserPhoto(Uri.parse(userModel.getData().getUser().getPublicInfo().getPhoto()));
+        mDataManager.getmPreferensesManager().saveUserPhoto(Uri.parse(userModel.getData().getUser().getPublicInfo().getPhoto()));
     }
+
 }

@@ -17,13 +17,14 @@ public class PreferensesManager {
             ConstantManager.USER_MAIL_KEY,
             ConstantManager.USER_VK_KEY,
             ConstantManager.USER_GIT_KEY,
-            ConstantManager.USER_ABOUT_KEY};
+            ConstantManager.USER_BIO_KEY};
 
     private static final String[] USER_VALUES = {
                         ConstantManager.USER_RATING_VALUE,
                         ConstantManager.USER_CODE_LINES_VALUE,
                         ConstantManager.USER_PROJECTS_VALUE
                         };
+
     private static final String[] NAV_VALUES = {
                         ConstantManager.NAV_FIRST_NAME_VALUES,
                         ConstantManager.NAV_SECOND_NAME_VALUES,
@@ -51,71 +52,23 @@ public class PreferensesManager {
     }
     public List<String> loadUserProfileData(){
         List<String> userFields = new ArrayList<>();
-        for (int i = 0; i < USER_FIELDS.length; i++) {
-            userFields.add(mSharedPreferenses.getString(USER_FIELDS[i], "null"));
-        }
+        userFields.add(mSharedPreferenses.getString(ConstantManager.CONTENT_PHONE_VALUES, "null"));
+        userFields.add(mSharedPreferenses.getString(ConstantManager.CONTENT_EMAIL_VALUES, "null"));
+        userFields.add(mSharedPreferenses.getString(ConstantManager.CONTENT_VK_VALUES, "null"));
+        userFields.add(mSharedPreferenses.getString(ConstantManager.CONTENT_GIT_VALUES, "null"));
+        userFields.add(mSharedPreferenses.getString(ConstantManager.CONTENT_BIO_VALUES, "null"));
         return userFields;
     }
-    public void saveUserProfileValue(int[] userValues){
-        SharedPreferences.Editor editor = mSharedPreferenses.edit();
-        for (int i = 0; i < USER_VALUES.length; i++) {
-            editor.putString(USER_VALUES[i], String.valueOf(userValues[i]));
-        }
-        editor.apply();
-    }
-    public List<String> loadUserProfileValue(){
-        List<String> userValues = new ArrayList<>();
-        for (int i = 0; i < USER_VALUES.length; i++) {
-            userValues.add(mSharedPreferenses.getString(USER_VALUES[i], "0"));
-        }
-        return userValues;
-    }
 
-    public void saveContentValue(String[] contentValues){
-        SharedPreferences.Editor editor = mSharedPreferenses.edit();
-        for (int i = 0; i < CONTENT_VALUES.length; i++) {
-            if (CONTENT_VALUES[i].equals(ConstantManager.CONTENT_VK_VALUES) ||
-                    CONTENT_VALUES[i].equals(ConstantManager.CONTENT_GIT_VALUES)) {
-                editor.putString(CONTENT_VALUES[i], contentValues[i].substring(7));
-            }else{
-                editor.putString(CONTENT_VALUES[i], contentValues[i]);
-            }
-        }
-        editor.apply();
-    }
 
-    public List<String> loadContentValue(){
-                List<String> userValues = new ArrayList<>();
-               for (int i = 0; i < CONTENT_VALUES.length; i++) {
-                        userValues.add(mSharedPreferenses.getString(CONTENT_VALUES[i], "null"));
-                    }
-                return userValues;
-            }
-
-    public void saveNavValue(String[] navValues){
-        SharedPreferences.Editor editor = mSharedPreferenses.edit();
-        for (int i = 0; i < NAV_VALUES.length; i++) {
-            editor.putString(NAV_VALUES[i], navValues[i]);
-        }
-        editor.apply();
-    }
-
-    public List<String> loadNavValue(){
-        List<String> userValues = new ArrayList<>();
-        for (int i = 0; i < NAV_VALUES.length; i++) {
-            userValues.add(mSharedPreferenses.getString(NAV_VALUES[i], "null"));
-        }
-        return userValues;
-    }
-
-    public void SaveUserPhoto(Uri uri){
+    public void saveUserPhoto(Uri uri){
         SharedPreferences.Editor editor = mSharedPreferenses.edit();
         editor.putString(ConstantManager.USER_PHOTO_KEY, uri.toString());
         editor.apply();
     }
     public Uri loadUserPhoto(){
 
-        return Uri.parse(mSharedPreferenses.getString(ConstantManager.USER_PHONE_KEY, "android.resource://com.softdesign.devintensive/drawable/userphoto" ));
+        return Uri.parse(mSharedPreferenses.getString(ConstantManager.USER_PHOTO_KEY, "android.resource://com.softdesign.devintensive/drawable/userphoto" ));
     }
 
     public void saveAuthToken(String authToken){
@@ -139,4 +92,70 @@ public class PreferensesManager {
     public String getEmail(){
         return mSharedPreferenses.getString(ConstantManager.CONTENT_EMAIL_VALUES, "null");
     }
+
+
+    /**
+     * Сохранение значение информации о кодинге
+     * @param userValues
+     */
+     public void saveUserProfileValue(int[] userValues){
+         SharedPreferences.Editor editor = mSharedPreferenses.edit();
+         for (int i = 0; i< USER_VALUES.length;i++) {
+             editor.putString(USER_VALUES[i], String.valueOf(userValues[i]));
+         }
+         editor.apply();
+    }
+
+    /**
+     * Загрузка значений о кодинге  с сервера
+     * @return
+     */
+    public List<String> loadUserProfileValue(){
+        List<String> userValues = new ArrayList<>();
+        userValues.add(mSharedPreferenses.getString(ConstantManager.USER_RATING_VALUE, "0"));
+        userValues.add(mSharedPreferenses.getString(ConstantManager.USER_CODE_LINES_VALUE, "0"));
+        userValues.add(mSharedPreferenses.getString(ConstantManager.USER_PROJECTS_VALUE, "0"));
+        return userValues;
+    }
+
+    public void saveContentValue(String[] contentValues){
+        SharedPreferences.Editor editor = mSharedPreferenses.edit();
+        for (int i = 0; i < CONTENT_VALUES.length; i++) {
+            if (CONTENT_VALUES[i].equals(ConstantManager.CONTENT_VK_VALUES) ||
+                    CONTENT_VALUES[i].equals(ConstantManager.CONTENT_GIT_VALUES)) {
+                editor.putString(CONTENT_VALUES[i], contentValues[i].substring(7));
+            }else{
+                editor.putString(CONTENT_VALUES[i], contentValues[i]);
+            }
+        }
+        editor.apply();
+    }
+
+    public List<String> loadContentValue(){
+        List<String> userValues = new ArrayList<>();
+        for (int i = 0; i < CONTENT_VALUES.length; i++) {
+            userValues.add(mSharedPreferenses.getString(CONTENT_VALUES[i], "null"));
+        }
+        return userValues;
+    }
+
+
+
+     public void saveNavValue(String[] navValues){
+         SharedPreferences.Editor editor = mSharedPreferenses.edit();
+         for (int i = 0; i < NAV_VALUES.length; i++) {
+             editor.putString(NAV_VALUES[i], navValues[i]);
+         }
+         editor.apply();
+     }
+
+     public List<String> loadNavValue(){
+         List<String> userValues = new ArrayList<>();
+         for (int i = 0; i < NAV_VALUES.length; i++) {
+             userValues.add(mSharedPreferenses.getString(NAV_VALUES[i], "null"));
+         }
+         return userValues;
+     }
+
+
 }
